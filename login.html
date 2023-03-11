@@ -46,24 +46,17 @@
                                     </div>
                                     <form class="user">
                                         <div class="form-group">
-                                            <input type="email" class="form-control form-control-user"
-                                                id="exampleInputEmail" aria-describedby="emailHelp"
-                                                placeholder="Enter Email Address...">
+                                            <input type="text" class="form-control form-control-user"
+                                                id="username" name="username" aria-describedby="emailHelp"
+                                                placeholder="Enter Name...">
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user"
-                                                id="exampleInputPassword" placeholder="Password">
+                                                id="password" name="password" placeholder="Password">
                                         </div>
-                                        <div class="form-group">
-                                            <div class="custom-control custom-checkbox small">
-                                                <input type="checkbox" class="custom-control-input" id="customCheck">
-                                                <label class="custom-control-label" for="customCheck">Remember
-                                                    Me</label>
-                                            </div>
-                                        </div>
-                                        <a href="index.html" class="btn btn-primary btn-user btn-block">
+                                        <button type="submit" class="btn btn-primary btn-user btn-block">
                                             Login
-                                        </a>
+                                        </button>
                                     </form>
                                     <hr>
                                     <div class="text-center">
@@ -93,6 +86,39 @@
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("form").submit(function (event) {
+                var formData = {
+                    email_address: $("#username").val(),
+                    password: $("#password").val(),
+                    platform: "Website"
+                };
+                $.ajax({
+                    type: "POST",
+                    url: "https://api.redenes.org/dev/v1/login/",
+                    data: formData,
+                    dataType: "json",
+                    cors: true ,
+                    contentType:'application/json',
+                    secure: true,
+                    headers: {
+                        'Access-Control-Allow-Origin': '*',
+                        "Access-Control-Allow-Credentials": 'true',
+                        'Access-Control-Allow-Methods': 'GET,HEAD,OPTIONS,POST,PUT',
+                        'Access-Control-Allow-Headers': 'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers'
+                    },
+                    encode: true,
+                    success: function (data){
+                        console.log(data);
+                    }
+                }).done(function (data) {
+                    console.log(data);
+                });
+                event.preventDefault();
+            });
+        });
+    </script>
 
 </body>
 
