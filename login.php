@@ -97,14 +97,14 @@
                 $.ajax({
                     type: "POST",
                     url: "https://api.redenes.org/dev/v1/login/",
-                    data: formData,
+                    data: JSON.stringify(formData),
                     dataType: "json",
                     cors: true ,
                     contentType:'application/json',
                     secure: true,
                     headers: {
                         'Access-Control-Allow-Origin': '*',
-                        "Access-Control-Allow-Credentials": 'true',
+                        'Access-Control-Allow-Credentials': 'false',
                         'Access-Control-Allow-Methods': 'GET,HEAD,OPTIONS,POST,PUT',
                         'Access-Control-Allow-Headers': 'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers'
                     },
